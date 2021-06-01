@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="orange_peel">#FF9800</color>
+	<color name="dark_orange">#AC5B07</color>
+	<color name="black">#000000</color>
+	<color name="white">#ffffff</color>
+	
+	
+	<color name="blackTranslucent">#50000000</color>
+	<color name="grey">#595751</color>
+	<color name="greyDark">#44433F</color>
+	
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:foreground="?android:attr/selectableItemBackground"
+	xmlns:cardview="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/cardview_id"
+	style="@style/CardViewItem">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/cardview_background">
+
+		<com.mobiletv.image.SmartImageView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scaleType="centerInside"
+			android:id="@+id/id_thumbnail"/>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|center"
+			android:background="@color/blackTranslucent">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:layout_weight="1.0"
+				android:marqueeRepeatLimit="marquee_forever"
+				android:scrollHorizontally="true"
+				android:singleLine="true"
+				android:ellipsize="marquee"
+				android:gravity="center"
+				android:id="@+id/id_title"
+				android:padding="5dp"/>
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+</android.support.v7.widget.CardView>
+

@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+	signingConfigs {
+        release {
+            storeFile file('/storage/emulated/0/AppProjects/publish.keystore')
+            storePassword '499119'
+            keyAlias 'vanderclin'
+            keyPassword '499119'
+        }
+        debug {
+            storeFile file('/storage/emulated/0/AppProjects/publish.keystore')
+            storePassword '499119'
+            keyAlias 'vanderclin'
+            keyPassword '499119'
+        }
+    }
+    compileSdkVersion 21
+    buildToolsVersion "21.1.0"
+	
+	compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.mobiletv.app"
+		multiDexEnabled true
+    }
+    buildTypes {
+        release {
+			minifyEnabled true
+			shrinkResources true
+			signingConfig getSigningConfig().release
+			debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+		debug {
+			minifyEnabled false
+			shrinkResources false
+			signingConfig getSigningConfig().debug
+			debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+	implementation project(':video')
+	implementation project(':update')
+	implementation project(':image')
+	implementation 'com.android.support:cardview-v7:26.0.0'
+	implementation 'com.android.support:design:26.0.0'
+	implementation 'com.android.support:multidex:1.0.1'
+	implementation 'com.google.firebase:firebase-auth:16.0.1'
+	implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

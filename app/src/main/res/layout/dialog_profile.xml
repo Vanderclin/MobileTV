@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="200dp"
+	android:gravity="top|center"
+	android:orientation="vertical"
+	android:id="@+id/linearLayout"
+	android:padding="@dimen/activity_vertical_margin">
+
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@mipmap/ic_launcher"/>
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/username"
+		android:textSize="28dp"
+		android:textStyle="bold"
+		android:gravity="center"
+		android:id="@+id/id_dialog_profile_name"/>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/email"
+			android:textSize="12dp"
+			android:textStyle="bold"
+			android:gravity="center"
+			android:id="@+id/id_dialog_profile_email"/>
+
+		<ImageView
+			android:src="@mipmap/ic_error"
+			android:layout_width="16dp"
+			android:layout_height="16dp"
+			android:id="@+id/id_dialog_profile_verification"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

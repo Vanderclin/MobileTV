@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:gravity="center"
+	android:padding="16dp">
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/input_layout">
+
+		<EditText
+			android:inputType="textPersonName"
+			android:ems="10"
+			android:id="@+id/id_dialog_username"
+			style="@style/customEditText"
+			android:hint="@string/username"/>
+
+	</LinearLayout>
+
+	<Button
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Salvar"
+		android:layout_marginTop="10dp"
+		android:id="@+id/id_dialog_username_save"
+		android:background="@drawable/button_background"/>
+
+</LinearLayout>
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">
+		<item name="colorPrimary">@color/greyDark</item>
+		<item name="colorPrimaryDark">@color/greyDark</item>
+		<item name="itemColor">@color/greyDark</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="colorAccent">@color/orange_peel</item>
+		<item name="buttonStyle">@style/AppTheme.Button</item>
+	</style>
+
+	<style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
+		<item name="android:background">@drawable/button_background</item>
+		<item name="android:textColor">@color/orange_peel</item>
+	</style>
+
+	<style name="InputLayoutTop">
+		<item name="android:padding">5dp</item>
+		<item name="android:background">@drawable/input_layout_top</item>
+	</style>
+
+	<style name="InputLayoutBottom">
+		<item name="android:padding">5dp</item>
+		<item name="android:background">@drawable/input_layout_bottom</item>
+	</style>
+
+	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat" />
+
+	<style name="customEditText">
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:cursorVisible">false</item>
+		<item name="android:textCursorDrawable">@null</item>
+		<item name="android:textColor">#ff9800</item>
+		<item name="android:textColorHint">#ff9800</item>
+		<item name="android:padding">8dp</item>
+		<item name="android:ems">10</item>
+	</style>
+
+	<style name="AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">@drawable/alert_dialog</item>
+    </style>
+
+
+	<style name="CardViewItem" parent="CardView">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_weight">1.0</item>
+		<item name="android:layout_height">180dp</item>
+		<item name="android:layout_margin">5dp</item>
+		<item name="cardPreventCornerOverlap">false</item>
+		<item name="cardCornerRadius">3dp</item>
+		<item name="cardElevation">3dp</item>
+		<item name="cardBackgroundColor">@color/greyDark</item>
+	</style>
+	
+	
+	<style name="RootTheme" parent="android:Theme.Holo">
+	</style>
+    <style name="AppPret" parent="Theme.AppCompat">
+    </style>
+
+	<style name="PlayerTheme" parent="@style/RootTheme">
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowBackground">@android:color/black</item>
+	</style>
+
+	<style name="DemoButton">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:minWidth">40dp</item>
+	</style>
+
+	
+	<style name="EditText" parent="Theme.AppCompat">
+        <!-- Customize CardView -->
+        <item name="android:textColorHighlight">@color/dark_orange</item>
+        <item name="android:colorAccent">@color/dark_orange</item>
+    </style>
+	
+	<style name="CardViewTheme" parent="Theme.AppCompat">
+        <item name="cardBackgroundColor">@color/orange_peel</item>
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardMaxElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardPreventCornerOverlap">true</item>
+    </style>
+	
+</resources>

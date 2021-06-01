@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="lib_name">video</string>
+    <string name="erro">Erro!</string>
+	<string name="loading">Carregando...</string>
+	
+</resources>

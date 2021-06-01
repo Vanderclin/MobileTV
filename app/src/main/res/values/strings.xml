@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	
+    <string name="app_name">MobileTV</string>
+	<string name="app_description">O melhor app de TV online</string>
+	<string name="app_name_splash"><font color="#FF9800">Mobile</font><font color="#FFFFFF">TV</font></string>
+    <string name="hello_world">Hello world!</string>
+	
+	<string name="first">Ínicio</string>
+	<string name="others">Outros</string>
+	
+	<string name="profile">Perfil</string>
+	<string name="signin">Entrar</string>
+	<string name="signout">Sair</string>
+	<string name="email">E-mail</string>
+	<string name="password">Senha</string>
+	<string name="username">Nome de usuário</string>
+	<string name="minimum_password">Senha muito curta, digite no mínimo 8 caracteres!</string>
+    <string name="auth_failed">Falha na autenticação, verifique seu e-mail ou senha</string>
+    
+	<string name="complete_action_using">Complete a ação usando</string>
+	<string name="open_nav_drawer">Aberto</string>
+	<string name="close_nav_drawer">Fechado</string>
+	
+	<string name="views">visualizações</string>
+	<string name="enter_your_email">Digite seu e-mail</string>
+	<string name="enter_your_password">Digite sua senha</string>
+	<string name="type_a_message">Digite uma mensagem</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:gravity="center"
+	android:orientation="vertical"
+	android:padding="16dp"
+	android:background="?attr/itemColor">
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/app_name_splash"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:gravity="center"
+		android:layout_marginBottom="10dp"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		style="@style/InputLayoutTop">
+
+		<EditText
+			android:inputType="textEmailAddress"
+			style="@style/customEditText"
+			android:hint="@string/email"
+			android:id="@+id/email_signin"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		style="@style/InputLayoutBottom">
+
+		<EditText
+			android:inputType="textPassword"
+			android:hint="@string/password"
+			style="@style/customEditText"
+			android:id="@+id/password_signin"/>
+
+	</LinearLayout>
+
+	<Button
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/signin"
+		android:layout_marginTop="10dp"
+		android:id="@+id/button_signin"/>
+
+	<ProgressBar
+		android:layout_width="30dp"
+		android:layout_height="30dp"
+		android:layout_marginTop="10dp"
+		android:id="@+id/progress_signin"
+		android:visibility="gone"
+		android:indeterminateDrawable="@drawable/progress_bar"/>
+
+</LinearLayout>
+
