@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.google.firebase.database.FirebaseDatabase;
+import android.widget.TextView;
 
 public class PlayerActivity extends AppCompatActivity implements VideoView.VideoViewCallback {
 
@@ -62,6 +63,7 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 	private String name, email, uid;
 	private Uri photoUrl;
 	private boolean emailVerified;
+	private Integer watching;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,18 +93,32 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 
 		mMediaController.setTitle(title);
 		mVideoView.start();
-		
-		
+
+
 		mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 		messageView = new ArrayList<>();
 		mListView = findViewById(R.id.message_view);
 		mEditText = findViewById(R.id.message_in);
 		mImageButton = findViewById(R.id.message_send);
-		
+
 		mDatabaseReference.child("channels").child(key).addValueEventListener(new ValueEventListener() {
 				@Override
 				public void onDataChange(DataSnapshot dataSnapshot) {
-					Long values = dataSnapshot.child("views").getValue(Long.class);
+					
+					if (dataSnapshot.child("views").exists() == false) {
+						mDatabaseReference.child("channels").child(key).child("views").setValue(0);
+					}
+
+					watching = dataSnapshot.child("views").getValue(Integer.class);
+					TextView mViews = findViewById(R.id.views_indicator);
+					TextView mChannel = findViewById(R.id.channel_name);
+					if (watching == null) {
+						mViews.setText("0 " + getString(R.string.views));
+					} else {
+						mViews.setText(String.valueOf(watching)+" " +getString(R.string.views));
+					}
+					mChannel.setText(title);
+
 					messageView.clear();
 					for (DataSnapshot postSnapshot : dataSnapshot.child("comments").getChildren()) {
 						MessageView proList = postSnapshot.getValue(MessageView.class);
@@ -129,10 +145,7 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 		mImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-
-
 					String message = mEditText.getText().toString();
-
 					Date today = Calendar.getInstance().getTime();
 					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm - dd/MM/yyyy");
 					String time = formatter.format(today);
@@ -153,6 +166,12 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 
 	}
 
+	@Override
+    public void onResume() {
+        mVideoView.start();
+        super.onResume();
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -162,6 +181,12 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
             Log.d(TAG, "onPause mSeekPosition=" + mSeekPosition);
             mVideoView.pause();
         }
+    }
+
+	@Override
+    public void onDestroy() {
+		// Write Here
+        super.onDestroy();
     }
 
     private void setVideoAreaSize() {
@@ -225,8 +250,7 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
             } else {
                 supportActionBar.hide();
 				requestWindowFeature(Window.FEATURE_NO_TITLE);
-				this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-										  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+				this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
             }
         }
     }
@@ -238,6 +262,8 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 
     @Override
     public void onStart(MediaPlayer mediaPlayer) {
+		watching++;
+		mDatabaseReference.child("channels").child(key).child("views").setValue(watching);
 
 	}
 
