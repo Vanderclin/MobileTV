@@ -8,16 +8,19 @@
 	
 	<string name="profile">Perfil</string>
 	<string name="signin">Entrar</string>
+	<string name="signup">Inscrever-se</string>
 	<string name="signout">Sair</string>
 	<string name="email">E-mail</string>
 	<string name="password">Senha</string>
 	<string name="username">Nome de usuário</string>
 	<string name="minimum_password">Senha muito curta, digite no mínimo 8 caracteres!</string>
     <string name="auth_failed">Falha na autenticação, verifique seu e-mail ou senha</string>
-    
+    <string name="the_email_address_is_already_in_use_by_another_account">O endereço de e-mail já está sendo usado por outra conta</string>
 	<string name="channel">Canal</string>
 	<string name="close_nav_drawer">Fechado</string>
 	
+	<string name="i_already_have_an_account">Já tenho uma conta!</string>
+	<string name="create_an_account">Criar conta!</string>
 	<string name="views">visualizações</string>
 	<string name="enter_your_email">Digite seu e-mail</string>
 	<string name="enter_your_password">Digite sua senha</string>

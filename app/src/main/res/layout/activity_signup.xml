@@ -25,7 +25,7 @@
 			android:inputType="textEmailAddress"
 			style="@style/customEditText"
 			android:hint="@string/email"
-			android:id="@+id/email_signin"/>
+			android:id="@+id/email_signup"/>
 
 	</LinearLayout>
 
@@ -38,31 +38,31 @@
 			android:inputType="textPassword"
 			android:hint="@string/password"
 			style="@style/customEditText"
-			android:id="@+id/password_signin"/>
+			android:id="@+id/password_signup"/>
 
 	</LinearLayout>
 
 	<Button
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="@string/signin"
+		android:text="@string/signup"
 		android:layout_marginTop="10dp"
 		android:textAllCaps="false"
-		android:id="@+id/button_signin"/>
+		android:id="@+id/button_signup"/>
 
 	<Button
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="@string/create_an_account"
+		android:text="@string/i_already_have_an_account"
 		android:textAllCaps="false"
 		android:background="#00000000"
-		android:id="@+id/button_new_account"/>
+		android:id="@+id/button_new_signin"/>
 
 	<ProgressBar
 		android:layout_width="30dp"
 		android:layout_height="30dp"
 		android:layout_marginTop="10dp"
-		android:id="@+id/progress_signin"
+		android:id="@+id/progress_signup"
 		android:visibility="gone"
 		android:indeterminateDrawable="@drawable/progress_bar"/>
 

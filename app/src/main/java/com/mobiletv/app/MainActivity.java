@@ -44,6 +44,14 @@ import java.util.List;
 import java.util.Map;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.SeekBar;
+import com.startapp.sdk.adsbase.StartAppSDK;
+import com.startapp.sdk.adsbase.Ad;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.StartAppSDK;
+import com.startapp.sdk.adsbase.VideoListener;
+import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
+
+
 
 public class MainActivity extends AppCompatActivity {
 	private FirebaseAuth mAuth;
@@ -217,28 +225,35 @@ public class MainActivity extends AppCompatActivity {
 
         final AlertDialog mDialogInterface = mAlertDialogBuilder.create();
         mDialogInterface.show();
+	}
+	
+	public void showInterstitial(View view) {
+        startActivity(new Intent(this, OtherActivity.class));
 
-		/*
-		 save.setOnClickListener(new View.OnClickListener() {
-		 @Override
-		 public void onClick(View view) {
-		 String username = name.getText().toString();
-		 if (TextUtils.isEmpty(username)) {
-		 Toast.makeText(getApplicationContext(), "Obrigatorio...", Toast.LENGTH_SHORT).show();
-		 return;
-		 } else {
-		 Map<String, Object> values = new HashMap<>();
-		 values.put("current_name", name.getText().toString());
-		 values.put("current_email", email);
-		 values.put("current_uid", uid);
-		 mDatabaseReference.child("users").child(uid).setValue(values);
-		 updateProfile(username);
-		 mDialogInterface.dismiss();
-		 }
+        StartAppAd.showAd(this);
+    }
 
-		 }
-		 });
-		 */
+	public void showRewardedVideo() {
+		final StartAppAd rewardedVideo = new StartAppAd(this);
+
+		rewardedVideo.setVideoListener(new VideoListener() {
+				@Override
+				public void onVideoCompleted() {
+					// Grant the reward to user
+				}
+			});
+
+		rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+				@Override
+				public void onReceiveAd(Ad ad) {
+					rewardedVideo.showAd();
+				}
+
+				@Override
+				public void onFailedToReceiveAd(Ad ad) {
+					// Can't show rewarded video
+				}
+			});
 	}
 
 }
