@@ -42,6 +42,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 	private FirebaseAuth mAuth;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 	private RecyclerView mRecyclerView;
 	private int orientationDevice;
 	private Toolbar mToolbar;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 		} else {
 			orientationDevice = 3;
 		}
+		
 		mAuth = FirebaseAuth.getInstance();
 		if (mAuth.getCurrentUser() != null) {
 			name = mAuth.getCurrentUser().getDisplayName();
@@ -105,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 			startActivity(new Intent(MainActivity.this, SignInActivity.class));
             finishAffinity();
 		}
+		
     }
 	
 	private void checkConnection() {

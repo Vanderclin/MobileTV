@@ -1,6 +1,7 @@
 package com.mobiletv.app;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,14 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mobiletv.app.MessageView;
 import com.mobiletv.app.PlayerActivity;
@@ -32,8 +37,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.google.firebase.database.FirebaseDatabase;
-import android.widget.TextView;
 
 public class PlayerActivity extends AppCompatActivity implements VideoView.VideoViewCallback {
 
@@ -53,6 +56,7 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 	private ListView mListView;
 	private EditText mEditText;
 	private ImageButton mImageButton;
+	private ToggleButton mToggleButton;
 
 	private List<MessageView> messageView;
 
@@ -64,6 +68,8 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 	private Uri photoUrl;
 	private boolean emailVerified;
 	private Integer watching;
+	private static int aux = 0;
+	private AudioManager mAudioManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,11 +84,30 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 		}
         mVideoLayout = findViewById(R.id.video_layout);
         mBottomLayout = findViewById(R.id.bottom_layout);
+		mToggleButton = findViewById(R.id.muted_button);
         mVideoView = findViewById(R.id.videoView);
         mMediaController = findViewById(R.id.media_controller);
         mVideoView.setMediaController(mMediaController);
         setVideoAreaSize();
         mVideoView.setVideoViewCallback(this);
+		
+		mToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					mAudioManager = (AudioManager) getSystemService(PlayerActivity.AUDIO_SERVICE);
+					if(isChecked)
+					{
+						mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
+					}
+					else
+					{
+						mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 50, 0);
+					}
+
+				}
+			});
+
 
 		Intent intent = getIntent();
         title = intent.getExtras().getString("title");
@@ -185,7 +210,7 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 
 	@Override
     public void onDestroy() {
-		// Write Here
+		finish();
         super.onDestroy();
     }
 
