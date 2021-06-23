@@ -11,13 +11,6 @@ import android.widget.*;
 import com.google.android.gms.tasks.*;
 import com.google.firebase.auth.*;
 import com.mobiletv.app.*;
-import com.startapp.sdk.adsbase.StartAppSDK;
-import com.startapp.sdk.adsbase.Ad;
-import com.startapp.sdk.adsbase.StartAppAd;
-import com.startapp.sdk.adsbase.StartAppSDK;
-import com.startapp.sdk.adsbase.VideoListener;
-import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
-
 import com.mobiletv.app.R;
 
 public class SignInActivity extends AppCompatActivity {
@@ -92,33 +85,6 @@ public class SignInActivity extends AppCompatActivity {
             finishAffinity();
         }
 	}
+
 	
-	public void showInterstitial(View view) {
-        startActivity(new Intent(this, OtherActivity.class));
-
-        StartAppAd.showAd(this);
-    }
-
-	public void showRewardedVideo() {
-		final StartAppAd rewardedVideo = new StartAppAd(this);
-
-		rewardedVideo.setVideoListener(new VideoListener() {
-				@Override
-				public void onVideoCompleted() {
-					// Grant the reward to user
-				}
-			});
-
-		rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-				@Override
-				public void onReceiveAd(Ad ad) {
-					rewardedVideo.showAd();
-				}
-
-				@Override
-				public void onFailedToReceiveAd(Ad ad) {
-					// Can't show rewarded video
-				}
-			});
-	}
 }

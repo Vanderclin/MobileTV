@@ -68,7 +68,6 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 	private Uri photoUrl;
 	private boolean emailVerified;
 	private Integer watching;
-	private static int aux = 0;
 	private AudioManager mAudioManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +101,7 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 					}
 					else
 					{
-						mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 50, 0);
+						mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 5, 0);
 					}
 
 				}

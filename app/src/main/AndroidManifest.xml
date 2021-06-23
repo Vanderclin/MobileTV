@@ -1,88 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version='1.0' encoding='utf-8'?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobiletv.app"
-	android:versionCode="13"
-	android:versionName="1.3">
+    android:versionCode="14"
+    android:versionName="1.4">
 
-	<uses-sdk
-		android:minSdkVersion="21"
-		android:targetSdkVersion="29">
-	</uses-sdk>
-
-	<uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Acesso completo à rede -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+		
+    <!-- Exibir conexões de rede -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-	<uses-permission android:name="android.permission.BLUETOOTH" />
 
-	<supports-screens
-        android:resizeable="true"
-        android:smallScreens="true"
-        android:largeScreens="true"
-        android:xlargeScreens="true"
-        android:normalScreens="true"
-        android:anyDensity="true">
-	</supports-screens>
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="29">
+    </uses-sdk>
 
     <application
-		android:hardwareAccelerated="true"
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-		android:description="@string/app_description"
+        android:description="@string/app_description"
         android:theme="@style/AppTheme"
-		android:resizeableActivity="true">
+        android:resizeableActivity="true">
+
         <activity
             android:name=".SignInActivity"
-			android:configChanges="orientation|keyboardHidden|screenSize"
-			android:windowSoftInputMode="adjustResize"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-		<activity
-            android:name=".SignUpActivity"
-			android:configChanges="orientation|keyboardHidden|screenSize"
-			android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustResize"
             android:label="@string/app_name">
-		</activity>
 
-		<activity
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".SignUpActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/app_name">
+
+        </activity>
+
+        <activity
             android:name=".MainActivity"
-			android:hardwareAccelerated="true"
-			android:configChanges="orientation|keyboardHidden|screenSize"
-			android:windowSoftInputMode="adjustResize"
-            android:label="@string/app_name" >
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/app_name">
+
         </activity>
-		<activity
+
+        <activity
             android:name=".PlayerActivity"
-			android:hardwareAccelerated="true"
-			android:configChanges="orientation|keyboardHidden|screenSize"
-			android:windowSoftInputMode="adjustResize"
-            android:label="@string/app_name" >
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/app_name">
+			
         </activity>
-		<activity
-            android:name=".OtherActivity"
-			android:hardwareAccelerated="true"
-			android:configChanges="orientation|keyboardHidden|screenSize"
-			android:windowSoftInputMode="adjustResize">
-        </activity>
-
-		<activity
-            android:name="com.startapp.sdk.ads.interstitials.OverlayActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
-            android:theme="@android:style/Theme.Translucent">
-
-		</activity>
-
-		<meta-data
-			android:name="com.startapp.sdk.APPLICATION_ID"
-			android:value="211416228" />
-
 
     </application>
 

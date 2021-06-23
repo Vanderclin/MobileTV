@@ -26,12 +26,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import com.startapp.sdk.adsbase.StartAppSDK;
-import com.startapp.sdk.adsbase.Ad;
-import com.startapp.sdk.adsbase.StartAppAd;
-import com.startapp.sdk.adsbase.StartAppSDK;
-import com.startapp.sdk.adsbase.VideoListener;
-import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -110,32 +104,4 @@ public class SignUpActivity extends AppCompatActivity {
         ProgressBar.setVisibility(View.GONE);
     }
 	
-	public void showInterstitial(View view) {
-        startActivity(new Intent(this, OtherActivity.class));
-
-        StartAppAd.showAd(this);
-    }
-
-	public void showRewardedVideo() {
-		final StartAppAd rewardedVideo = new StartAppAd(this);
-
-		rewardedVideo.setVideoListener(new VideoListener() {
-				@Override
-				public void onVideoCompleted() {
-					// Grant the reward to user
-				}
-			});
-
-		rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-				@Override
-				public void onReceiveAd(Ad ad) {
-					rewardedVideo.showAd();
-				}
-
-				@Override
-				public void onFailedToReceiveAd(Ad ad) {
-					// Can't show rewarded video
-				}
-			});
-	}
 }
