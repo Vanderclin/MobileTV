@@ -67,7 +67,6 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 	private String name, email, uid;
 	private Uri photoUrl;
 	private boolean emailVerified;
-	private Integer watching;
 	private AudioManager mAudioManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,21 +127,8 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 		mDatabaseReference.child("channels").child(key).addValueEventListener(new ValueEventListener() {
 				@Override
 				public void onDataChange(DataSnapshot dataSnapshot) {
-					
-					if (dataSnapshot.child("views").exists() == false) {
-						mDatabaseReference.child("channels").child(key).child("views").setValue(0);
-					}
-
-					watching = dataSnapshot.child("views").getValue(Integer.class);
-					TextView mViews = findViewById(R.id.views_indicator);
 					TextView mChannel = findViewById(R.id.channel_name);
-					if (watching == null) {
-						mViews.setText("0 " + getString(R.string.views));
-					} else {
-						mViews.setText(String.valueOf(watching)+" " +getString(R.string.views));
-					}
 					mChannel.setText(title);
-
 					messageView.clear();
 					for (DataSnapshot postSnapshot : dataSnapshot.child("comments").getChildren()) {
 						MessageView proList = postSnapshot.getValue(MessageView.class);
@@ -286,9 +272,7 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 
     @Override
     public void onStart(MediaPlayer mediaPlayer) {
-		watching++;
-		mDatabaseReference.child("channels").child(key).child("views").setValue(watching);
-
+		
 	}
 
     @Override
