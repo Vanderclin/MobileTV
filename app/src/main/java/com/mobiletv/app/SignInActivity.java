@@ -22,14 +22,15 @@ public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+		getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
 		authInstance();
         setContentView(R.layout.activity_signin);
-		Email = findViewById(R.id.email_signin);
-        Password = findViewById(R.id.password_signin);
-        ProgressBar = findViewById(R.id.progress_signin);
-        ButtonSignIn = findViewById(R.id.button_signin);
-		ButtonSignUp = findViewById(R.id.button_new_account);
+		Email = (EditText) findViewById(R.id.email_signin);
+        Password = (EditText) findViewById(R.id.password_signin);
+        ProgressBar = (ProgressBar) findViewById(R.id.progress_signin);
+        ButtonSignIn = (Button) findViewById(R.id.button_signin);
+		ButtonSignUp = (Button) findViewById(R.id.button_new_account);
 		
         mAuth = FirebaseAuth.getInstance();
         ButtonSignUp.setOnClickListener(new View.OnClickListener() {

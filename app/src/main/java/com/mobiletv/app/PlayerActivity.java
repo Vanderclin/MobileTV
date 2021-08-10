@@ -19,6 +19,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,8 +71,11 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 	private Uri photoUrl;
 	private boolean emailVerified;
 	private AudioManager mAudioManager;
+
+	private AdView mAdViewDescription, mAdViewVideo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+		getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 		mAuth = FirebaseAuth.getInstance();
@@ -80,11 +86,22 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 			photoUrl = mAuth.getCurrentUser().getPhotoUrl();
 			emailVerified = mAuth.getCurrentUser().isEmailVerified();
 		}
+		
+		MobileAds.initialize(this, getString(R.string.id_app));
+        mAdViewDescription = (AdView) findViewById(R.id.adViewDescription);
+		mAdViewVideo = (AdView) findViewById(R.id.adViewVideo);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        mAdViewDescription.loadAd(adRequest);
+		mAdViewVideo.loadAd(adRequest);
+		
+		
+		
+		
         mVideoLayout = findViewById(R.id.video_layout);
         mBottomLayout = findViewById(R.id.bottom_layout);
-		mToggleButton = findViewById(R.id.muted_button);
-        mVideoView = findViewById(R.id.videoView);
-        mMediaController = findViewById(R.id.media_controller);
+		mToggleButton = (ToggleButton) findViewById(R.id.muted_button);
+        mVideoView = (VideoView) findViewById(R.id.videoView);
+        mMediaController = (MediaController) findViewById(R.id.media_controller);
         mVideoView.setMediaController(mMediaController);
         setVideoAreaSize();
         mVideoView.setVideoViewCallback(this);
@@ -120,14 +137,14 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 
 		mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 		messageView = new ArrayList<>();
-		mListView = findViewById(R.id.message_view);
-		mEditText = findViewById(R.id.message_in);
-		mImageButton = findViewById(R.id.message_send);
+		mListView = (ListView) findViewById(R.id.message_view);
+		mEditText = (EditText) findViewById(R.id.message_in);
+		mImageButton = (ImageButton) findViewById(R.id.message_send);
 
 		mDatabaseReference.child("channels").child(key).addValueEventListener(new ValueEventListener() {
 				@Override
 				public void onDataChange(DataSnapshot dataSnapshot) {
-					TextView mChannel = findViewById(R.id.channel_name);
+					TextView mChannel = (TextView) findViewById(R.id.channel_name);
 					mChannel.setText(title);
 					messageView.clear();
 					for (DataSnapshot postSnapshot : dataSnapshot.child("comments").getChildren()) {
@@ -175,15 +192,23 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 			});
 
 	}
-
+	
 	@Override
     public void onResume() {
         mVideoView.start();
         super.onResume();
+		if (mAdViewDescription != null || mAdViewVideo != null) {
+            mAdViewDescription.resume();
+			mAdViewVideo.resume();
+        }
     }
 
     @Override
     protected void onPause() {
+		if (mAdViewDescription != null || mAdViewVideo != null) {
+            mAdViewDescription.pause();
+			mAdViewVideo.pause();
+        }
         super.onPause();
         Log.d(TAG, "onPause ");
         if (mVideoView != null && mVideoView.isPlaying()) {
@@ -196,6 +221,10 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
 	@Override
     public void onDestroy() {
 		finish();
+		if (mAdViewDescription != null || mAdViewVideo != null) {
+            mAdViewDescription.destroy();
+			mAdViewVideo.destroy();
+        }
         super.onDestroy();
     }
 
@@ -248,23 +277,26 @@ public class PlayerActivity extends AppCompatActivity implements VideoView.Video
             mVideoLayout.setLayoutParams(layoutParams);
             mBottomLayout.setVisibility(View.VISIBLE);
         }
-
-        switchTitleBar(!isFullscreen);
+		
+		switchAdView(!isFullscreen);
     }
-
-    private void switchTitleBar(boolean show) {
-        android.support.v7.app.ActionBar supportActionBar = getSupportActionBar();
-        if (supportActionBar != null) {
+	
+    private void switchAdView(boolean show) {
+        if (getSupportActionBar() != null) {
             if (show) {
-                supportActionBar.show();
+                // getSupportActionBar().show();
+				mAdViewDescription.setVisibility(View.VISIBLE);
+				mAdViewVideo.setVisibility(View.GONE);
             } else {
-                supportActionBar.hide();
-				requestWindowFeature(Window.FEATURE_NO_TITLE);
-				this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                // getSupportActionBar().hide();
+				mAdViewDescription.setVisibility(View.GONE);
+				mAdViewVideo.setVisibility(View.VISIBLE);
+				
             }
         }
     }
-
+	
+	
     @Override
     public void onPause(MediaPlayer mediaPlayer) {
 

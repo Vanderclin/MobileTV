@@ -12,7 +12,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,6 +23,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,8 +44,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.SeekBar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -56,15 +56,14 @@ public class MainActivity extends AppCompatActivity {
 	private List <Channels> mChannelsList;
 	private RecyclerView mRecyclerView;
 	private int orientationDevice;
-	private Toolbar mToolbar;
+
+	private AdView mAdView;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 		checkConnection();
-		mToolbar = findViewById(R.id.appbar);
-		setSupportActionBar(mToolbar);
 		int orientation = getResources().getConfiguration().orientation;
 		if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			orientationDevice = 5;
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 							Channels mChannels = postSnapshot.getValue(Channels.class);
 							mChannelsList.add(mChannels);
 						}
-						mRecyclerView = findViewById(R.id.recyclerview_id);
+						mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_id);
 						ChannelsAdapter mAdapter = new ChannelsAdapter(MainActivity.this, mChannelsList);
 						mRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, orientationDevice));
 						mRecyclerView.setAdapter(mAdapter);
@@ -110,6 +109,12 @@ public class MainActivity extends AppCompatActivity {
 			startActivity(new Intent(MainActivity.this, SignInActivity.class));
             finishAffinity();
 		}
+		
+		MobileAds.initialize(this, getString(R.string.id_app));
+        mAdView = (AdView) findViewById(R.id.ad_view);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        mAdView.loadAd(adRequest);
+		
 		
     }
 	

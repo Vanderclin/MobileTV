@@ -2,6 +2,7 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:ads="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:keepScreenOn="true"
@@ -28,22 +29,49 @@
 			android:layout_height="fill_parent"
 			app:scalable="true"/>
 
+		<com.google.android.gms.ads.AdView
+			android:id="@+id/adViewVideo"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|center"
+			ads:adSize="BANNER"
+			ads:adUnitId="@string/id_banner_two"
+			android:visibility="gone"/>
+
 	</FrameLayout>
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="50dp"
-		android:orientation="horizontal"
-		android:gravity="left|center"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:gravity="center"
 		android:padding="10dp">
 
-		<TextView
-			android:layout_width="wrap_content"
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="@string/channel"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:gravity="center"
-			android:id="@+id/channel_name"/>
+			android:layout_marginBottom="10dp"
+			android:gravity="left|center">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/channel"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:gravity="center"
+				android:id="@+id/channel_name"/>
+
+		</LinearLayout>
+
+		<com.google.android.gms.ads.AdView
+			android:id="@+id/adViewDescription"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|center"
+			ads:adSize="BANNER"
+			ads:adUnitId="@string/id_banner_two"
+			android:visibility="visible"/>
 
 	</LinearLayout>
 

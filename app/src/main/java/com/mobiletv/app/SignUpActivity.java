@@ -36,17 +36,18 @@ public class SignUpActivity extends AppCompatActivity {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+		getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
         //Get Firebase auth instance
         mAuth = FirebaseAuth.getInstance();
 
-        Email = findViewById(R.id.email_signup);
-        Password = findViewById(R.id.password_signup);
-        ProgressBar = findViewById(R.id.progress_signup);
-        ButtonSignUp= findViewById(R.id.button_signup);
-		ButtonSignIn = findViewById(R.id.button_new_signin);
+        Email = (EditText) findViewById(R.id.email_signup);
+        Password = (EditText) findViewById(R.id.password_signup);
+        ProgressBar = (ProgressBar) findViewById(R.id.progress_signup);
+        ButtonSignUp= (Button) findViewById(R.id.button_signup);
+		ButtonSignIn = (Button) findViewById(R.id.button_new_signin);
 		
 		ButtonSignIn.setOnClickListener(new View.OnClickListener() {
 			

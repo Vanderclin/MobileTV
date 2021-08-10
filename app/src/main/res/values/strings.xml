@@ -25,4 +25,10 @@
 	<string name="enter_your_email">Digite seu e-mail</string>
 	<string name="enter_your_password">Digite sua senha</string>
 	<string name="type_a_message">Digite uma mensagem</string>
+	
+	<string name="id_app">ca-app-pub-8199467179911567~1277245153</string>
+	<string name="id_banner_one">ca-app-pub-8199467179911567/4917107262</string>
+	<string name="id_banner_two">ca-app-pub-8199467179911567/6146428452</string>
+	
+	
 </resources>
