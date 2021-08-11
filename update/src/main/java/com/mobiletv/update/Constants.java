@@ -12,5 +12,5 @@ class Constants {
 
     static final String TAG = "UpdateChecker";
 
-    static final String UPDATE_URL = "https://raw.githubusercontent.com/Vanderclin/MobileTV/main/vdevs/update.json";
+    static final String UPDATE_URL = "https://app.pixreward.ml/assets/update/MobileTV/update.json";
 }
