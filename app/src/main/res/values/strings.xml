@@ -30,5 +30,11 @@
 	<string name="id_banner_one">ca-app-pub-8199467179911567/4917107262</string>
 	<string name="id_banner_two">ca-app-pub-8199467179911567/6146428452</string>
 	
+	<string name="dialog_title">Olá! Seja bem vindo(a)</string>
+	<string name="dialog_message">Ajude-nos à adicionar mais canais baseado em sua região, assim podemos aumentar o número de canais levando até você mais conteúdo.</string>
+	<string name="dialog_positive">Sim, claro!</string>
+	<string name="dialog_negative">Agora não</string>
+	
+	
 	
 </resources>

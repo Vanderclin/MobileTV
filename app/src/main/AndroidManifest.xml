@@ -5,15 +5,22 @@
     android:versionCode="16"
     android:versionName="1.6">
 
-    <!-- Acesso completo à rede -->
+    <!--Acesso completo à rede-->
     <uses-permission android:name="android.permission.INTERNET"/>
-		
-    <!-- Exibir conexões de rede -->
+
+    <!--Exibir conexões de rede-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <!--Localização exata (baseada na rede e no GPS)-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <!--Localização aproximada (baseada em rede)-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <uses-sdk
         android:minSdkVersion="21"
         android:targetSdkVersion="29">
+
     </uses-sdk>
 
     <application
@@ -64,7 +71,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustResize"
             android:label="@string/app_name">
-			
+
         </activity>
 
     </application>

@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 			if (name == null || name == "") {
 				addName();
 			}
+			FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 			mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 			mChannelsList = new ArrayList<>();
 			mDatabaseReference.child("channels").orderByChild("title").addValueEventListener(new ValueEventListener() {
