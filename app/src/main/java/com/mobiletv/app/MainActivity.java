@@ -1,13 +1,21 @@
 package com.mobiletv.app;
 
+import android.Manifest;
 import android.annotation.NonNull;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -39,6 +47,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.mobiletv.app.Channels;
 import com.mobiletv.app.MainActivity;
 import com.mobiletv.app.R;
+import com.mobiletv.app.SignUpActivity;
 import com.mobiletv.update.UpdateChecker;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener {
 	private FirebaseAuth mAuth;
 	private String name, email, uid;
 	private Uri photoUrl;
@@ -58,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
 	private int orientationDevice;
 
 	private AdView mAdView;
+	
+	// Get Location
+	protected LocationManager locationManager;
+	protected LocationListener locationListener;
+	protected String current_location;
+	private boolean mValue;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
 			orientationDevice = 3;
 		}
 		
+		FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+		mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+		
 		mAuth = FirebaseAuth.getInstance();
 		if (mAuth.getCurrentUser() != null) {
 			name = mAuth.getCurrentUser().getDisplayName();
@@ -82,8 +100,7 @@ public class MainActivity extends AppCompatActivity {
 			if (name == null || name == "") {
 				addName();
 			}
-			FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-			mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+			
 			mChannelsList = new ArrayList<>();
 			mDatabaseReference.child("channels").orderByChild("title").addValueEventListener(new ValueEventListener() {
 					@Override
@@ -111,11 +128,15 @@ public class MainActivity extends AppCompatActivity {
             finishAffinity();
 		}
 		
+		
 		MobileAds.initialize(this, getString(R.string.id_app));
         mAdView = (AdView) findViewById(R.id.ad_view);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         mAdView.loadAd(adRequest);
 		
+		
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		
     }
 	
@@ -224,6 +245,27 @@ public class MainActivity extends AppCompatActivity {
 
         final AlertDialog mDialogInterface = mAlertDialogBuilder.create();
         mDialogInterface.show();
+	}
+	
+	@Override
+	public void onLocationChanged(Location location) {
+		// txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+		current_location = String.valueOf(location.getLatitude() +","+ location.getLongitude());
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// Log.d("Latitude", "disable");
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// Log.d("Latitude", "enable");
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// Log.d("Latitude", "status");
 	}
 
 }

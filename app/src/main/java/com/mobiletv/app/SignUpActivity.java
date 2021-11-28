@@ -29,8 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressBar ProgressBar;
     private Button ButtonSignUp, ButtonSignIn;
-	private boolean mValue;
-	
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 		getSupportActionBar().hide();
@@ -39,15 +38,14 @@ public class SignUpActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         mAuth = FirebaseAuth.getInstance();
-		openFirstDialog();
         Email = (EditText) findViewById(R.id.email_signup);
         Password = (EditText) findViewById(R.id.password_signup);
         ProgressBar = (ProgressBar) findViewById(R.id.progress_signup);
-        ButtonSignUp= (Button) findViewById(R.id.button_signup);
+        ButtonSignUp = (Button) findViewById(R.id.button_signup);
 		ButtonSignIn = (Button) findViewById(R.id.button_new_signin);
-		
+
 		ButtonSignIn.setOnClickListener(new View.OnClickListener() {
-			
+
 				@Override
 				public void onClick(View v) {
 					startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
@@ -101,67 +99,5 @@ public class SignUpActivity extends AppCompatActivity {
         super.onResume();
         ProgressBar.setVisibility(View.GONE);
     }
-	
-	private void openFirstDialog() {
-        mValue = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("mValue", true);
 
-        if (mValue) {
-            AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(this);
-
-			mAlertDialog.setIcon(R.mipmap.ic_launcher);
-            mAlertDialog.setTitle(getString(R.string.dialog_title));
-            mAlertDialog.setMessage(getString(R.string.dialog_message));
-			mAlertDialog.setCancelable(false);
-			
-			
-			
-			mAlertDialog.setNegativeButton(getString(R.string.dialog_negative), new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			});
-			
-            mAlertDialog.setPositiveButton(getString(R.string.dialog_positive), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						openDialogPermission();
-					}
-				});
-            mAlertDialog.show();
-            // getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("mValue", false).commit();
-        }
-    }
-	
-	private void openDialogPermission() {
-		if (ContextCompat.checkSelfPermission(SignUpActivity.this,
-											  Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-			if (ActivityCompat.shouldShowRequestPermissionRationale(SignUpActivity.this,Manifest.permission.ACCESS_FINE_LOCATION)){ 
-			ActivityCompat.requestPermissions(SignUpActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-			}else{
-				ActivityCompat.requestPermissions(SignUpActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-			}
-		}
-	}
-	
-	@Override
-	public void onRequestPermissionsResult(int requestCode, String[] permissions,
-										   int[] grantResults){
-		switch (requestCode){
-			case 1: {
-					if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-						if (ContextCompat.checkSelfPermission(SignUpActivity.this,
-															  Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
-							Toast.makeText(this, "Obrigado! Com isso iremos trabalhar na busca de canais em sua região", Toast.LENGTH_SHORT).show();
-							getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("mValue", false).commit();
-						}
-					}else{
-						Toast.makeText(this, "Infelizmente não podemos fazer nada, mas você pode tentar de novo assim que voltar.", Toast.LENGTH_SHORT).show();
-					}
-					return;
-				}
-		}
-	}
-	
 }
